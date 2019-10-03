@@ -4,3 +4,9 @@
 # Address blocks in CIDR notation
 127.0.0.0/8
 ::1/128
+#Mr.T
+193.191.177.6
+2001:6a8:2880:a021::6
+#Home
+81.164.191.223
+2a02:1811:d0a:2900:e4d2:5add:f254:ffdc 
