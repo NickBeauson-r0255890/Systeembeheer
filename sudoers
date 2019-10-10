@@ -15,12 +15,12 @@ Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 # User alias specification
 
 # Cmnd alias specification
-
+Cmnd_Alias PRINTING = /usr/lib/nagios/plugins/check_apt, /usr/sbin/arp
 # User privilege specification
 root	ALL=(ALL:ALL) ALL
-
+check ALL=(ALL) NOPASSWD:PRINTING
 # Members of the admin group may gain root privileges
-%admin ALL=(ALL) ALL
+#%admin ALL=(ALL) ALL
 
 # Allow members of group sudo to execute any command
 %sudo	ALL=(ALL:ALL) ALL
