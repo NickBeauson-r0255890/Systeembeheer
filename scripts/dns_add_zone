@@ -2,8 +2,7 @@
 zone=$1
 
 FILENAME='db.'"$zone"'.nick-beauson.sb.uclllabs.be'
-FN=testt
-FILE=/etc/bind/$FN
+FILE=/etc/bind/$FILENAME
 if test -f "$FILE"; then
 	echo 'Zone '"$1"' already exists'
 else
@@ -18,7 +17,25 @@ echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" {
 ' >> $input
 
 #Create db.$.nick-beauson.sb.uclllabs.be file
-#output=/etc/bind/$FILENAME
+output=/etc/bind/$FILENAME
 echo 'Creating file: '"$FILENAME" 
+echo '
+$TTL      86400
+$ORIGIN '"$zone"'.nick-beauson.sb.uclllabs.be.
+@       IN      SOA     ns.'"$zone"'.nick-beauson.sb.uclllabs.be. root.ns.'"$zone"'.nick-beauson.sb.uclllabs.be. (
+				10              ;Serial
+				604800          ;Refresh
+				86400           ;Retry
+				2419200         ;Expire
+				86400 )         ;Negative Cache TTL
+;Name servers
+	IN      NS      ns.'"$zone"'.nick-beauson.sb.uclllabs.be.
+
+;A records
+ns      IN       A      193.191.177.210
+' >> $output
+
+echo 'Restarting bind9'
+sudo service bind9 restart 
 
 fi
