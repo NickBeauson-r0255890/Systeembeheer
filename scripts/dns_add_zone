@@ -12,9 +12,10 @@ echo 'Creating zone'
 input="../bind/test"
 echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" { 
   type master;
-  file "/etc/bind/'"$FILENAME$"'";
+  file "/etc/bind/'"$FILENAME"'";
   allow-transfer { 193.191.176.254; 193.191.177.254; 193.191.177.4; 193.191.177.160; };
-};' >> $input
+};
+' >> $input
 
 #Create db.$.nick-beauson.sb.uclllabs.be file
 #output=/etc/bind/$FILENAME
