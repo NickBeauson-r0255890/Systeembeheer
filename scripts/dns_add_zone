@@ -5,19 +5,19 @@ FILENAME='db.'"$zone"'.nick-beauson.sb.uclllabs.be'
 FN=testt
 FILE=/etc/bind/$FN
 if test -f "$FILE"; then
-	echo 'Zone \''"$1"' already exists'
+	echo 'Zone '"$1"' already exists'
 else
-
+echo 'Creating zone'
 #Add zone into named.conf.local
 input="../bind/test"
 echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" { 
   type master;
-  file "/etc/bind/db.'"$zone"'.nick-beauson.sb.uclllabs.be;
+  file "/etc/bind/'"$FILENAME$"'";
   allow-transfer { 193.191.176.254; 193.191.177.254; 193.191.177.4; 193.191.177.160; };
 };' >> $input
 
 #Create db.$.nick-beauson.sb.uclllabs.be file
-output=/etc/bind/$FILENAME
-echo 'testje' >>  $output
+#output=/etc/bind/$FILENAME
+echo 'Creating file: '"$FILENAME" 
 
 fi
