@@ -4,11 +4,14 @@ zone=$1
 FILENAME='db.'"$zone"'.nick-beauson.sb.uclllabs.be'
 FILE=/etc/bind/$FILENAME
 if test -f "$FILE"; then
+
 	echo 'Zone '"$1"' already exists'
+
 else
+
 echo 'Creating zone'
 #Add zone into named.conf.local
-input="../bind/test"
+input="../bind/named.conf.local"
 echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" { 
   type master;
   file "/etc/bind/'"$FILENAME"'";
@@ -30,11 +33,18 @@ $ORIGIN '"$zone"'.nick-beauson.sb.uclllabs.be.
 				86400 )         ;Negative Cache TTL
 ;Name servers
 	IN      NS      ns.'"$zone"'.nick-beauson.sb.uclllabs.be.
-
+        IN      NS      ns.nick-beauson.sb.uclllabs.be.
 ;A records
 ns      IN       A      193.191.177.210
+@       IN       A      193.191.177.210
 ' >> $output
 
+#update db.nick-beauson.sb.uclllabs.be
+
+
+
+
+#Restart bind9 service
 echo 'Restarting bind9'
 sudo service bind9 restart 
 
