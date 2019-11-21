@@ -44,9 +44,10 @@ DBFILE=/etc/bind/db.nick-beauson.sb.uclllabs.be
 echo "$zone"'      IN      NS      ns.nick-beauson.sb.uclllabs.be.' >> $DBFILE 
 
 #update serial in db.nick-beauson.sb.uclllabs.be
-line=$(grep "Serial" ../bind/db.nick-beauson.sb.uclllabs.be)
-echo $line
-
+Serial=$(grep 'Serial' ../bind/db.nick-beauson.sb.uclllabs.be)
+SerialNumber=$(echo $Serial | sed 's/[^0-9]*//g')
+((SerialNumber++))
+echo $SerialNumber
 
 
 #Restart bind9 service
