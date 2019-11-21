@@ -23,9 +23,9 @@ echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" {
 output=/etc/bind/$FILENAME
 echo 'Creating file: '"$FILENAME" 
 echo '
-$TTL      86400
+$TTL 300     ;86400
 $ORIGIN '"$zone"'.nick-beauson.sb.uclllabs.be.
-@       IN      SOA     ns.'"$zone"'.nick-beauson.sb.uclllabs.be. root.ns.'"$zone"'.nick-beauson.sb.uclllabs.be. (
+@       IN      SOA    '"$zone"'.nick-beauson.sb.uclllabs.be. root.'"$zone"'.nick-beauson.sb.uclllabs.be. (
 				10              ;Serial
 				604800          ;Refresh
 				86400           ;Retry
@@ -47,8 +47,8 @@ echo "$zone"'      IN      NS      ns.nick-beauson.sb.uclllabs.be.' >> $DBFILE
 Serial=$(grep 'Serial' ../bind/db.nick-beauson.sb.uclllabs.be)
 SerialNumber=$(echo $Serial | sed 's/[^0-9]*//g')
 ((SerialNumber++))
-echo $SerialNumber
-
+newSerial='                                '"$SerialNumber"'        ;Serial'
+sed -i "s/.*Serial.*/\t\t\t      $newSerial/g" ../bind/db.nick-beauson.sb.uclllabs.be
 
 #Restart bind9 service
 echo 'Restarting bind9'
