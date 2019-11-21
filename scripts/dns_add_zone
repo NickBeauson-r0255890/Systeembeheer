@@ -32,20 +32,26 @@ $ORIGIN '"$zone"'.nick-beauson.sb.uclllabs.be.
 				2419200         ;Expire
 				86400 )         ;Negative Cache TTL
 ;Name servers
-	IN      NS      ns.'"$zone"'.nick-beauson.sb.uclllabs.be.
-        IN      NS      ns.nick-beauson.sb.uclllabs.be.
+@	IN      NS      ns.'"$zone"'.nick-beauson.sb.uclllabs.be.
+@       IN      NS      ns.nick-beauson.sb.uclllabs.be.
 ;A records
 ns      IN       A      193.191.177.210
 @       IN       A      193.191.177.210
 ' >> $output
 
 #update db.nick-beauson.sb.uclllabs.be
+DBFILE=/etc/bind/db.nick-beauson.sb.uclllabs.be
+echo "$zone"'      IN      NS      ns.nick-beauson.sb.uclllabs.be.' >> $DBFILE 
 
+#update serial in db.nick-beauson.sb.uclllabs.be
+line=$(grep "Serial" ../bind/db.nick-beauson.sb.uclllabs.be)
+echo $line
 
 
 
 #Restart bind9 service
 echo 'Restarting bind9'
-sudo service bind9 restart 
-
+systemctl restart bind9
+ 
+echo 'Finished'
 fi
