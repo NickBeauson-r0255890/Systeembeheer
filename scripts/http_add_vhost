@@ -19,19 +19,20 @@ echo '
         CustomLog ${APACHE_LOG_DIR}/'"$1"'-access.log combined
 </Virtualhost>' >> $output
 
-
-#extract correct param 
-subdomain= echo $vhost | awk -F. '{print $1}'
-echo $subdomain
-
 #create documentroot + index
 echo 'Creating documentroot'
 mkdir /var/www/html/$1
 IndexOutput=/var/www/html/$1/index.html
 
+#extract param subdomain
+IFS='.' read var1 var2 <<< "$1"
+subdomain="$var1"
+echo 'subdomain: '"$subdomain"
+
+
 echo '<html>
 <body>
-<p>welcome '"$subdomain"'</p>
+<p>welcome '"$subdomain"'.nick-beauson</p>
 </body>
 </html>' >> $IndexOutput 
 
