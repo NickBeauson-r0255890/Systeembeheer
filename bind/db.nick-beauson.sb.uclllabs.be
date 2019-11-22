@@ -4,7 +4,7 @@ $TTL	86400
 $ORIGIN nick-beauson.sb.uclllabs.be.
 
 @	IN	SOA	ns.nick-beauson.sb.uclllabs.be. root.ns.nick-beauson.sb.uclllabs.be. (
-			                                      39        ;Serial
+			                                      40        ;Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
