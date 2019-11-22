@@ -6,14 +6,23 @@ elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
  	echo "Creating MX record"
 
 elif [[ $1 = "-t" ]] && [[ $2 = A ]] || [[ $1 != "-t" ]]; then
-	echo "Creatin A record"
-	arec=""
+	
+	arecord=""
+ 	aip=""
+ 	dom=""
 	if [[ $1 = "-t" ]]; then
- 		arec=$3
+ 		arecord=$3
+ 		aip=$4
+		dom=$5
 	else
- 		arec=$1
+ 		arecord=$1
+		aip=$2
+ 		dom=$3
 	fi
-	echo $arec
+	echo 'Creating '"$arecord"'-record for ip: '"$aip"' & domain: '"$dom"
 
+	DBFILE=/etc/bind/db.$dom
+	echo $DBFILE
+	echo "$arecord"'    IN        A        '"$aip" >> DBFILE
 
 fi
