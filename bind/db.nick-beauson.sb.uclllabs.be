@@ -4,7 +4,7 @@ $TTL	86400
 $ORIGIN nick-beauson.sb.uclllabs.be.
 
 @	IN	SOA	ns.nick-beauson.sb.uclllabs.be. root.ns.nick-beauson.sb.uclllabs.be. (
-			                                      47        ;Serial
+			                                      49        ;Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
@@ -27,7 +27,7 @@ supersecure IN  A       193.191.177.210
 @       IN      CAA     0 issue "letsencrypt.org"
 @       IN      CAA     0 iodef "mailto:nick.beauson@student.ucll.be"
 
-@       IN      MX      mx
+       IN      MX      10 mx.nick-beauson.sb.uclllabs.be.
 mx      IN      A       193.191.177.210
 
 subzoneahf8hi      IN      NS      ns.nick-beauson.sb.uclllabs.be.

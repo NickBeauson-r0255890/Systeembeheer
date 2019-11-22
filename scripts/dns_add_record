@@ -38,7 +38,7 @@ elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
 	dom=$5
  	echo "$dom"
 	DBfile=/etc/bind/db.$dom
-	echo '@     IN     MX     mail.'"$dom"'.' >> $DBfile
+	echo '@     IN     MX    10 '"$arecord"'.'"$dom"'.' >> $DBfile
 	echo "$arecord"'     IN     A       '"$aip" >> $DBfile
 
 	#adjust serialnr
