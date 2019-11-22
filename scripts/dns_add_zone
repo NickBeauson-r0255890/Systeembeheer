@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if  [[$(/usr/bin/id -u) -ne 0]]; then
+if  [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Not running as root"
     exit
 fi
@@ -17,7 +17,7 @@ else
 
 echo 'Creating zone'
 #Add zone into named.conf.local
-input="../bind/named.conf.local"
+input="/etc/bind/named.conf.local"
 echo 'zone "'"$zone"'.nick-beauson.sb.uclllabs.be" {
   type master;
   file "/etc/bind/'"$FILENAME"'";
@@ -50,11 +50,11 @@ DBFILE=/etc/bind/db.nick-beauson.sb.uclllabs.be
 echo "$zone"'      IN      NS      ns.nick-beauson.sb.uclllabs.be.' >> $DBFILE
 
 #update serial in db.nick-beauson.sb.uclllabs.be
-Serial=$(grep 'Serial' ../bind/db.nick-beauson.sb.uclllabs.be)
+Serial=$(grep 'Serial' /etc/bind/db.nick-beauson.sb.uclllabs.be)
 SerialNumber=$(echo $Serial | sed 's/[^0-9]*//g')
 ((SerialNumber++))
 newSerial='                                '"$SerialNumber"'        ;Serial'
-sed -i "s/.*Serial.*/\t\t\t      $newSerial/g" ../bind/db.nick-beauson.sb.uclllabs.be
+sed -i "s/.*Serial.*/\t\t\t      $newSerial/g" /etc/bind/db.nick-beauson.sb.uclllabs.be
 
 #Restart bind9 service
 echo 'Restarting bind9'

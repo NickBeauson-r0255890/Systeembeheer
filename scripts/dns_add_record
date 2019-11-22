@@ -1,0 +1,19 @@
+#!/bin/bash
+if [[ $1 = "-t" ]] && [[ $2 = CNAME ]]; then
+ 	echo "Creating CNAME record"
+
+elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
+ 	echo "Creating MX record"
+
+elif [[ $1 = "-t" ]] && [[ $2 = A ]] || [[ $1 != "-t" ]]; then
+	echo "Creatin A record"
+	arec=""
+	if [[ $1 = "-t" ]]; then
+ 		arec=$3
+	else
+ 		arec=$1
+	fi
+	echo $arec
+
+
+fi

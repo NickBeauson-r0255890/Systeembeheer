@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if  [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Not running as root"
+    exit
+fi
+
+vhost=$1
+
+#Create vhost in 003-scripts.conf
+echo 'Creating vhost'
+output=/etc/apache2/sites-available/003-scripts.conf
+echo '
+<VirtualHost *:80>
+        ServerName '"$1"'
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html/'"$1"'
+        ErrorLog ${APACHE_LOG_DIR}/'"$1"'-error.log
+        CustomLog ${APACHE_LOG_DIR}/'"$1"'-access.log combined
+</Virtualhost>' >> $output
+
+
+#extract correct param 
+subdomain= echo $vhost | awk -F. '{print $1}'
+echo $subdomain
+
+#create documentroot + index
+echo 'Creating documentroot'
+mkdir /var/www/html/$1
+IndexOutput=/var/www/html/$1/index.html
+
+echo '<html>
+<body>
+<p>welcome '"$subdomain"'</p>
+</body>
+</html>' >> $IndexOutput 
+
+systemctl reload apache2
+echo 'Finished'
