@@ -27,6 +27,9 @@ supersecure IN  A       193.191.177.210
 @       IN      CAA     0 issue "letsencrypt.org"
 @       IN      CAA     0 iodef "mailto:nick.beauson@student.ucll.be"
 
+@       IN      MX      mx.nick-beauson.sb.uclllabs.be
+mx      IN      A       193.191.177.210
+
 subzoneahf8hi      IN      NS      ns.nick-beauson.sb.uclllabs.be.
 subzonenei3ci      IN      NS      ns.nick-beauson.sb.uclllabs.be.
 subzoneooqu1o      IN      NS      ns.nick-beauson.sb.uclllabs.be.
