@@ -1,18 +1,27 @@
 #!/bin/bash
+
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+ 	echo "Not running as root"
+	exit
+fi
+
 arecord=""
+CNAMErecord=""
 aip=""
 dom=""
 
 #CNAME
 if [[ $1 = "-t" ]] && [[ $2 = CNAME ]]; then
  	echo "Creating CNAME record"
- 	arecord=$3
-	aip=$4
-	dom=$5
-	echo 'Creatin
-
-	DbFile=/etc/bind/db.$dom
- 	echo "$arecord"'     IN         CNAME        'www" >> $DbFile
+ 	CNAMErecord=$3
+	dom=$4
+	#get wanted alias
+	IFS='.' read var1 var2 <<< "$dom"
+	AliasTo="$var1" 
+ 	Domain="$var2"
+	
+	DbFile=/etc/bind/db.$Domain
+ 	echo "$CNAMErecord"'     IN         CNAME        '"$AliasTo" >> $DbFile
 
 	#adjust serialnr
  	Serial=$(grep 'Serial' $DbFile)
@@ -27,10 +36,17 @@ elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
  	arecord=$3
  	aip=$4
 	dom=$5
-	echo 'Creating '"$arecord"'-record
+ 	echo "$dom"
 	DBfile=/etc/bind/db.$dom
-	echo '@     IN     MX     mail.nick-beauson.sb.uclllabs.be.' >> DBfile
-	echo "$arecord"'     IN     A       '"$aip" >> DBfile
+	echo '@     IN     MX     mail.'"$dom"'.' >> $DBfile
+	echo "$arecord"'     IN     A       '"$aip" >> $DBfile
+
+	#adjust serialnr
+	Serial=$(grep 'Serial' $DBfile)
+	SerialNumber=$(echo $Serial| sed 's/[^0-9]*//g')
+	((SerialNumber++))
+	newSerial='                            '"$SerialNumber"'        ;Serial'
+	sed -i "s/.*Serial.*/\t\t $newSerial/g" $DBfile
 
 #A record
 elif [[ $1 = "-t" ]] && [[ $2 = A ]] || [[ $1 != "-t" ]]; then

@@ -37,5 +37,6 @@ echo '<html>
 </body>
 </html>' >> $IndexOutput 
 
+echo 'reloading apache2'
 systemctl reload apache2
 echo 'Finished'
