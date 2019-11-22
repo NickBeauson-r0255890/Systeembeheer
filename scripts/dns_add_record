@@ -1,15 +1,39 @@
 #!/bin/bash
+arecord=""
+aip=""
+dom=""
+
+#CNAME
 if [[ $1 = "-t" ]] && [[ $2 = CNAME ]]; then
  	echo "Creating CNAME record"
+ 	arecord=$3
+	aip=$4
+	dom=$5
+	echo 'Creatin
 
+	DbFile=/etc/bind/db.$dom
+ 	echo "$arecord"'     IN         CNAME        'www" >> $DbFile
+
+	#adjust serialnr
+ 	Serial=$(grep 'Serial' $DbFile)
+ 	SerialNumber=$(echo $Serial | sed 's/[^0-9]*//g')
+	((SerialNumber++))
+	newSerial='                             '"$SerialNumber"'        ;Serial'
+ 	sed -i "s/.*Serial.*/\t\t $newSerial/g" $DbFile
+
+#MX record
 elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
  	echo "Creating MX record"
+ 	arecord=$3
+ 	aip=$4
+	dom=$5
+	echo 'Creating '"$arecord"'-record
+	DBfile=/etc/bind/db.$dom
+	echo "$arecord"'     IN     MX     nick-beauson.sb.uclllabs.be' >> DBfile
+	echo "$arecord"'     IN     A       '"$aip" >> DBfile
 
+#A record
 elif [[ $1 = "-t" ]] && [[ $2 = A ]] || [[ $1 != "-t" ]]; then
-	
-	arecord=""
- 	aip=""
- 	dom=""
 	if [[ $1 = "-t" ]]; then
  		arecord=$3
  		aip=$4
@@ -30,9 +54,7 @@ elif [[ $1 = "-t" ]] && [[ $2 = A ]] || [[ $1 != "-t" ]]; then
  	SerialNumber=$(echo $Serial | sed 's/[^0-9]*//g')
  	((SerialNumber++))
 	newSerial='                              '"$SerialNumber"'         ;Serial'
- 	sed -i "s/.*Serial.*/\t\t\t     $newSerial/g" $DBFILE
-
-
+ 	sed -i "s/.*Serial.*/\t\t $newSerial/g" $DBFILE
 
 fi
 

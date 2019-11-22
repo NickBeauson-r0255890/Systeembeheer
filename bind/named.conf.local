@@ -30,3 +30,9 @@ zone "subzoneooqu1o.nick-beauson.sb.uclllabs.be" {
   file "/etc/bind/db.subzoneooqu1o.nick-beauson.sb.uclllabs.be";
   allow-transfer { 193.191.176.254; 193.191.177.254; 193.191.177.4; 193.191.177.160; };
 };
+zone "subzonexe8mie.nick-beauson.sb.uclllabs.be" {
+  type master;
+  file "/etc/bind/db.subzonexe8mie.nick-beauson.sb.uclllabs.be";
+  allow-transfer { 193.191.176.254; 193.191.177.254; 193.191.177.4; 193.191.177.160; };
+};
+

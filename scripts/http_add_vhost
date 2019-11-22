@@ -25,14 +25,15 @@ mkdir /var/www/html/$1
 IndexOutput=/var/www/html/$1/index.html
 
 #extract param subdomain
-IFS='.' read var1 var2 <<< "$1"
-subdomain="$var1"
+IFS='.' read var1 var2 var3 <<< "$1"
+subdomain1="$var1"
+subdomain2="$var2"
+subdomain="$var1"'.'"$var2"
 echo 'subdomain: '"$subdomain"
-
 
 echo '<html>
 <body>
-<p>welcome '"$subdomain"'.nick-beauson</p>
+<p>welcome '"$subdomain"'</p>
 </body>
 </html>' >> $IndexOutput 
 
