@@ -29,7 +29,7 @@ elif [[ $1 = "-t" ]] && [[ $2 = MX ]]; then
 	dom=$5
 	echo 'Creating '"$arecord"'-record
 	DBfile=/etc/bind/db.$dom
-	echo "$arecord"'     IN     MX     nick-beauson.sb.uclllabs.be' >> DBfile
+	echo "$arecord"'     IN     MX     mail.nick-beauson.sb.uclllabs.be.' >> DBfile
 	echo "$arecord"'     IN     A       '"$aip" >> DBfile
 
 #A record
