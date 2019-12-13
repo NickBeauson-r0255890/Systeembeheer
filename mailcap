@@ -35,6 +35,28 @@ application/x-troff-man; /usr/bin/nroff -mandoc -Tutf8; copiousoutput; print=/us
 text/troff; /usr/bin/nroff -mandoc -Tutf8; copiousoutput; print=/usr/bin/nroff -mandoc -Tutf8 | print text/plain:-
 application/x-info; /usr/bin/info -f '%s'; needsterminal; description=GNU Info document
 text/plain; more %s; needsterminal
+image/bmp; eog %s; test=test -n "$DISPLAY"
+image/gif; eog %s; test=test -n "$DISPLAY"
+image/jpeg; eog %s; test=test -n "$DISPLAY"
+image/jpg; eog %s; test=test -n "$DISPLAY"
+image/pjpeg; eog %s; test=test -n "$DISPLAY"
+image/png; eog %s; test=test -n "$DISPLAY"
+image/tiff; eog %s; test=test -n "$DISPLAY"
+image/x-bmp; eog %s; test=test -n "$DISPLAY"
+image/x-gray; eog %s; test=test -n "$DISPLAY"
+image/x-icb; eog %s; test=test -n "$DISPLAY"
+image/x-ico; eog %s; test=test -n "$DISPLAY"
+image/x-png; eog %s; test=test -n "$DISPLAY"
+image/x-portable-anymap; eog %s; test=test -n "$DISPLAY"
+image/x-portable-bitmap; eog %s; test=test -n "$DISPLAY"
+image/x-portable-graymap; eog %s; test=test -n "$DISPLAY"
+image/x-portable-pixmap; eog %s; test=test -n "$DISPLAY"
+image/x-xbitmap; eog %s; test=test -n "$DISPLAY"
+image/x-xpixmap; eog %s; test=test -n "$DISPLAY"
+image/x-pcx; eog %s; test=test -n "$DISPLAY"
+image/svg+xml; eog %s; test=test -n "$DISPLAY"
+image/svg+xml-compressed; eog %s; test=test -n "$DISPLAY"
+image/vnd.wap.wbmp; eog %s; test=test -n "$DISPLAY"
 text/english; vim %s; needsterminal
 text/plain; vim %s; needsterminal
 text/x-makefile; vim %s; needsterminal
@@ -50,6 +72,10 @@ text/x-tex; vim %s; needsterminal
 application/x-shellscript; vim %s; needsterminal
 text/x-c; vim %s; needsterminal
 text/x-c++; vim %s; needsterminal
+x-scheme-handler/ghelp; yelp %s; test=test -n "$DISPLAY"
+x-scheme-handler/help; yelp %s; test=test -n "$DISPLAY"
+x-scheme-handler/info; yelp %s; test=test -n "$DISPLAY"
+x-scheme-handler/man; yelp %s; test=test -n "$DISPLAY"
 text/plain; view %s; edit=vim %s; compose=vim %s; test=test -x /usr/bin/vim; needsterminal
 text/plain; view %s; edit=vi %s; compose=vi %s; needsterminal
 application/x-troff-man; /usr/bin/man -Tascii -l '%s' | col -b; copiousoutput; description=Man page
